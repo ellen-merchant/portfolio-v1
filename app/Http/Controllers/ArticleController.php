@@ -6,6 +6,8 @@ use Ellllllen\PersonalWebsite\Articles\Article;
 use Ellllllen\PersonalWebsite\Articles\GetArticles;
 use Ellllllen\PersonalWebsite\Articles\ManageArticles;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
+
 
 class ArticleController extends Controller
 {
@@ -22,6 +24,12 @@ class ArticleController extends Controller
      */
     private $manageArticles;
 
+    /**
+     * BlogController constructor.
+     * @param GetArticles $getArticles
+     * @param Request $request
+     * @param ManageArticles $manageArticles
+     */
     public function __construct(GetArticles $getArticles, Request $request, ManageArticles $manageArticles)
     {
         $this->getArticles = $getArticles;
@@ -45,7 +53,7 @@ class ArticleController extends Controller
     {
         $article = Article::findOrFail($articleID);
 
-        return view('articles.show', compact('article'));
+        return view("articles.show", compact('article'));
     }
 
     public function create()
@@ -85,12 +93,6 @@ class ArticleController extends Controller
     public function update(int $articleID)
     {
         $article = Article::findOrFail($articleID);
-
-        $this->validate($this->request, [
-            'title' => ['required', "unique:articles,title,{$articleID},id"],
-            'section' => 'required',
-            'image' => ['image']
-        ]);
 
         $this->manageArticles->update($this->request->all(), $article);
 
