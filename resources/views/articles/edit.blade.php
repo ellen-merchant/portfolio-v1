@@ -11,8 +11,8 @@
         </div>
     @endif
     <form action="{{ route('articles.update', ['id' => $article->id]) }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+        {{ csrf_field() }}
+        <input type="hidden" name="_method" value="PUT">
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" required value="{{ $article->title }}">

@@ -11,7 +11,7 @@
         </div>
     @endif
     <form action="{{ route('articles.store') }}" method="post" enctype="multipart/form-data">
-        @csrf
+        {{ csrf_field() }}
         <div class="form-group">
             <label for="title">Title</label>
             <input type="text" class="form-control" id="title" name="title" required>
