@@ -6,8 +6,8 @@
             <a href="{{ route('articles.edit', ['id' => $article->id]) }}"
                class="btn btn-warning mr-2">Edit</a>
             <form action="{{ route('articles.destroy', ['id' => $article->id]) }}" method="POST">
-                @csrf
-                @method('DELETE')
+                {{ csrf_field() }}
+                <input type="hidden" name="_method" value="DELETE">
                 <input type="submit" class="btn btn-danger" value="Delete"
                        onclick="return confirm('Delete?');"/>
             </form>
